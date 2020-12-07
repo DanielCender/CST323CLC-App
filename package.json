@@ -7,7 +7,7 @@
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "prep:client": "cd client/ && npm install && npm run build",
-    "start:prod": "NODE_ENV=production npm run start",
+    "start:prod": "NODE_ENV=production PORT=3000 npm run start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server.js",
     "client": "node start-client.js",
