@@ -1,0 +1,39 @@
+{
+  "name": "cst-323-clc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "proxy": "http://localhost:3001/",
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "prep:client": "cd client/ && npm install && npm run build",
+    "start:prod": "NODE_ENV=production npm run start",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon server.js",
+    "client": "node start-client.js",
+    "lint": "eslint .",
+    "docs": "jsdoc -c jsdoc.conf.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sentry/node": "^5.28.0",
+    "@sentry/tracing": "^5.28.0",
+    "bcrypt": "^5.0.0",
+    "better-docs": "^2.3.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsdoc": "^3.6.6",
+    "mysql": "^2.18.1",
+    "uuid": "^8.3.1"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "eslint": "^7.14.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.21.5",
+    "nodemon": "^2.0.6"
+  }
+}
