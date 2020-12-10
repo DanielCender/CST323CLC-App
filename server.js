@@ -36,6 +36,8 @@ app.use(bodyParser.json());
 const { connect } = require('./lib/db/conn');
 connect();
 
+console.log('on env: ', process.env.NODE_ENV);
+
 // Create API Routes
 const { createUserRoutes, createPostRoutes } = require('./lib/routes');
 createUserRoutes(app);
@@ -43,7 +45,12 @@ createPostRoutes(app);
 
 // Express only serves static assets in production
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'client/build', 'index.html')));
+  // app.use(express.static(path.join(__dirname, 'build', 'index.html')));
+  app.use(express.static(__dirname));
+  app.use(express.static(path.join(__dirname, 'build')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+  });
 }
 
 // For testing local functionality, ping and Sentry test route

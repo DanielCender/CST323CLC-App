@@ -37,7 +37,7 @@
     "dev": "concurrently \"npm run server\" \"npm run frontend\"",
     "frontend": "react-scripts start",
     "server": "nodemon server.js",
-    "start": "npm run server",
+    "start": "NODE_ENV=production npm run server",
     "start:prod": "NODE_ENV=production PORT=3000 npm run start",
     "build": "react-scripts build",
     "test": "react-scripts test",
