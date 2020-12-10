@@ -1,1 +1,1 @@
-web: npm install && npm run start
+web: NODE_ENV=production node server.js

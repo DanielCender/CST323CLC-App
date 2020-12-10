@@ -1,39 +1,65 @@
 {
-  "name": "cst-323-clc",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "proxy": "http://localhost:3001/",
-  "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
-    "prep:client": "cd client/ && npm install && npm run build",
-    "start:prod": "NODE_ENV=production PORT=3000 npm run start",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server.js",
-    "client": "node start-client.js",
-    "lint": "eslint .",
-    "docs": "jsdoc -c jsdoc.conf.json"
-  },
-  "author": "",
-  "license": "ISC",
+  "name": "app",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://localhost:3001",
+  "heroku-postbuild": "react-scripts build",
   "dependencies": {
-    "@sentry/node": "^5.28.0",
-    "@sentry/tracing": "^5.28.0",
+    "@editorjs/editorjs": "^2.19.0",
+    "@sentry/node": "^5.29.0",
+    "@sentry/react": "^5.28.0",
+    "@sentry/tracing": "^5.29.0",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "babel-polyfill": "^6.26.0",
     "bcrypt": "^5.0.0",
+    "bcryptjs": "^2.4.3",
     "better-docs": "^2.3.2",
+    "bootstrap": "^4.5.3",
+    "concurrently": "^5.3.0",
     "dotenv": "^8.2.0",
+    "draft-js": "^0.11.7",
     "express": "^4.17.1",
     "jsdoc": "^3.6.6",
     "mysql": "^2.18.1",
-    "uuid": "^8.3.1"
+    "nodemon": "^2.0.6",
+    "react": "^17.0.1",
+    "react-bootstrap": "^1.4.0",
+    "react-dom": "^17.0.1",
+    "react-router-bootstrap": "^0.25.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.0",
+    "uuid": "^8.3.2",
+    "web-vitals": "^0.2.4"
   },
-  "devDependencies": {
-    "concurrently": "^5.3.0",
-    "eslint": "^7.14.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.21.5",
-    "nodemon": "^2.0.6"
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run frontend\"",
+    "frontend": "react-scripts start",
+    "server": "nodemon server.js",
+    "start": "NODE_ENV=production npm run server",
+    "start:prod": "NODE_ENV=production PORT=3000 npm run start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "docs": "jsdoc -c jsdoc.conf.json"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
