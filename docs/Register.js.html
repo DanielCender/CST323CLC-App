@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Register.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Register.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useState, useEffect } from 'react';
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
+import bcrypt from 'bcryptjs'
+
+// Helpers
+import { registerUser } from '../helpers/db/registerUser'
+
+export const Register = () => {
+    const history = useHistory()
+const [values, setValues] = useState({ firstName: '', lastName: '', email: '', password: '' });
+const [registrationResult, setRegistrationResult] = useState(null)
+
+    // This effect will see changes after a successful account creation,
+    //  and handle the redirect for us
+    useEffect(() => {
+        if(registrationResult) setTimeout(() => history.push('/login'), 2000)
+    }, [registrationResult])
+
+
+  /**
+   * Handles form input
+   * @param {} event 
+   */
+  // General form handler
+  const handleChange = (event) => {
+    // Set all new values, including prior untouched ones
+    setValues(prev => ({ ...prev, [event.target.name]: event.target.value }));
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    bcrypt.genSalt(10, function(err, salt) {
+        console.log('salt: ', salt)
+        console.log('pass: ', values.password);
+    bcrypt.hash(values.password, salt, function(err, hash) {
+        // Store hash in your password DB.
+        registerUser({ ...values, password: hash }).then(_ => {
+            // setRegistrationResult(true)
+        }).catch(e => {
+            console.log('error in registration: ', e.message)
+            setRegistrationResult(false)
+            alert('There was an error with the registration: ' + e.message)
+        })
+    });
+});
+  }
+
+    return (
+      &lt;Container fluid className='p-0 m-0' style={{width: '100%', height: '100%'}}>
+        &lt;div
+          style={{
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+          }}
+          className='bg-dark-gray'
+        >
+          &lt;h1>CREATE USER&lt;/h1>
+        &lt;/div>
+        &lt;div
+          style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+            borderTop: '15px solid #A0A09F',
+          }}
+          className='bg-dark pt-4 pb-4'
+        >
+          &lt;Form onSubmit={handleSubmit} validated={!!registrationResult}>
+            &lt;Row>
+              &lt;Col>
+                &lt;Form.Group controlId='formGroupFirstName'>
+                  &lt;Form.Label className='text-light'>FIRST NAME&lt;/Form.Label>
+                  &lt;Form.Control
+                    type='text'
+                    name='firstName'
+                    value={values.firstName}
+                    onChange={handleChange}
+                    placeholder='John'
+                    required={true}
+                  />
+                &lt;/Form.Group>
+              &lt;/Col>
+              &lt;Col>
+                &lt;Form.Group controlId='formGroupEmail'>
+                  &lt;Form.Label className='text-light'>EMAIL&lt;/Form.Label>
+                  &lt;Form.Control
+                    type='email'
+                    name='email'
+                    value={values.email}
+                    onChange={handleChange}
+                    placeholder='name@gmail.com'
+                    required={true}
+                  />
+                &lt;/Form.Group>
+              &lt;/Col>
+            &lt;/Row>
+            &lt;Row>
+              &lt;Col>
+                &lt;Form.Group controlId='formGroupLastName'>
+                  &lt;Form.Label className='text-light'>LAST NAME&lt;/Form.Label>
+                  &lt;Form.Control
+                    type='text'
+                    name='lastName'
+                    value={values.lastName}
+                    onChange={handleChange}
+                    placeholder='Smith'
+                    required={true}
+                  />
+                &lt;/Form.Group>
+              &lt;/Col>
+              &lt;Col>
+                &lt;Form.Group controlId='formGroupPassword'>
+                  &lt;Form.Label className='text-light'>PASSWORD&lt;/Form.Label>
+                  &lt;Form.Control
+                    type='password'
+                    name='password'
+                    value={values.password}
+                    onChange={handleChange}
+                    placeholder='Smith'
+                    required={true}
+                  />
+                &lt;/Form.Group>
+              &lt;/Col>
+            &lt;/Row>
+            &lt;Row className="justify-content-center d-flex">
+                &lt;Col className="justify-content-center d-flex">
+                &lt;Button variant="warning" type='submit' value='Submit' className="text-light">
+                    REGISTER
+                &lt;/Button>
+                &lt;/Col>
+            &lt;/Row>
+            &lt;/Form>
+        &lt;/div>
+      &lt;/Container>
+    );
+}
+
+export default Register;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Thu Dec 10 2020 01:48:32 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
