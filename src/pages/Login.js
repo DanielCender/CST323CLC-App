@@ -5,6 +5,27 @@ import { useHistory } from 'react-router-dom';
 // Helpers
 import { loginUser } from '../helpers/db/loginUser';
 
+/**
+ * Renders a Login form
+ * @param useHistory
+ * @param setValues 
+ * @param setLoginResult
+ * @param useLayoutEffect
+ * @param useEffect
+ * @param setShowToast
+ * @param handleRegister
+ * @param handleChange 
+ * @param handleSubmit
+ * @param props
+ * @param props.width
+ * @param props.height
+ * @param props.display
+ * @param props.justifyContent
+ * @param props.alignItems
+ * @param props.borderTop
+ * @param props.backgroundColor
+ * @param props.marginBottom
+ */
 export const Login = () => {
   const history = useHistory();
   const [values, setValues] = useState({ email: '', password: '' });
@@ -20,6 +41,14 @@ export const Login = () => {
   useEffect(() => {
     if (loginResult) setTimeout(() => history.push('/'), 2000);
   }, [loginResult]);
+
+  const [showToast, setShowToast] = useState(false)
+  const toggleShowToast = () => setShowToast(!showToast)
+
+  const handleRegister = () => {
+    if(window.localStorage.getItem("USER")) toggleShowToast()
+    else history.push('/register')
+  }
 
   // General form handler
   const handleChange = (event) => {
@@ -98,9 +127,16 @@ export const Login = () => {
           </Row>
           <Row className='justify-content-center d-flex'>
             <Col className='justify-content-center d-flex'>
-              <Button variant='warning' type='submit' value='Submit' className='text-light'>
+              <Button block size='lg' variant='warning' type='submit' value='Submit' className='text-light' style={{ marginBottom: '1rem' }}>
                 LOGIN
               </Button>
+            </Col>
+          </Row>
+          <Row className='justify-content-center d-flex'>
+            <Col className='justify-content-center d-flex'>
+            <Button block size='lg' variant='warning' type='button' style={{ backgroundColor: 'black' }} className='text-light' onClick={handleRegister}>
+              CREATE ACCOUNT
+            </Button>
             </Col>
           </Row>
         </Form>

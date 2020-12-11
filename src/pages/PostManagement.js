@@ -5,6 +5,30 @@ import { Link, useHistory } from 'react-router-dom';
 // Helpers
 import { listPostsByUser } from './../helpers/db/listPostsByUser';
 
+/**
+ * Renders PostManagement page
+ * @param useHistory
+ * @param useParams
+ * @param setPost
+ * @param setErrMsg
+ * @param setShowToast
+ * @param handleCreatePost
+ * @param useLayoutEffect
+ * @param useEffect
+ * @param props
+ * @param props.width
+ * @param props.maxWidth
+ * @param props.height
+ * @param props.position
+ * @param props.position.right
+ * @param props.position.bottom
+ * @param props.display
+ * @param props.justifyContent
+ * @param props.alignItems
+ * @param props.borderTop
+ * @param props.backgroundColor
+ * @param props.marginBottom
+ */
 export const PostManagement = () => {
   const history = useHistory();
   const [posts, setPosts] = useState([]);

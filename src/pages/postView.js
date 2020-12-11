@@ -1,6 +1,10 @@
 import React from 'react';
 
-
+/**
+ * Renders postView page
+ * @param Title
+ * @param props
+ */
 export const Title = () => {
     return (
         <div>

@@ -6,6 +6,21 @@ import bcrypt from 'bcryptjs'
 // Helpers
 import { registerUser } from '../helpers/db/registerUser'
 
+/**
+ * Renders a registration form
+ * @param useHistory
+ * @param setValues 
+ * @param setRegistrationResult
+ * @param handleChange 
+ * @param handleSubmit
+ * @param props
+ * @param props.width
+ * @param props.height
+ * @param props.display
+ * @param props.justifyContent
+ * @param props.alignItems
+ * @param props.borderTop
+ */
 export const Register = () => {
     const history = useHistory()
 const [values, setValues] = useState({ firstName: '', lastName: '', email: '', password: '' });
@@ -17,12 +32,6 @@ const [registrationResult, setRegistrationResult] = useState(null)
         if(registrationResult) setTimeout(() => history.push('/login'), 2000)
     }, [registrationResult])
 
-
-  /**
-   * Handles form input
-   * @param {} event 
-   */
-  // General form handler
   const handleChange = (event) => {
     // Set all new values, including prior untouched ones
     setValues(prev => ({ ...prev, [event.target.name]: event.target.value }));
@@ -129,7 +138,7 @@ const [registrationResult, setRegistrationResult] = useState(null)
             </Row>
             <Row className="justify-content-center d-flex">
                 <Col className="justify-content-center d-flex">
-                <Button variant="warning" type='submit' value='Submit' className="text-light">
+                <Button block size='lg' variant="warning" type='submit' value='Submit' className="text-light">
                     REGISTER
                 </Button>
                 </Col>

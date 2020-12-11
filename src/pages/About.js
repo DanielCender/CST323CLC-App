@@ -1,6 +1,16 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
+/**
+ * Renders the about page
+ * @param props
+ * @param props.width
+ * @param props.height
+ * @param props.display
+ * @param props.justifyContent
+ * @param props.alignItems
+ * @param props.borderTop
+ */
 export const About = () => {
   return (
     <Container fluid className='p-0 m-0' style={{ width: '100%', height: '100%' }}>

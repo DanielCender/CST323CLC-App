@@ -8,6 +8,28 @@ import PostEditor from '../components/Editor';
 // Helpers
 import { getPost } from './../helpers/db/getPost';
 
+/**
+ * Renders a account page
+ * @param useHistory
+ * @param useParams
+ * @param setPost
+ * @param setErrMsg
+ * @param setShowToast
+ * @param useEffect
+ * @param props
+ * @param props.width
+ * @param props.maxWidth
+ * @param props.height
+ * @param props.position
+ * @param props.position.right
+ * @param props.position.bottom
+ * @param props.display
+ * @param props.justifyContent
+ * @param props.alignItems
+ * @param props.borderTop
+ * @param props.backgroundColor
+ * @param props.marginBottom
+ */
 export const Post = () => {
   const history = useHistory();
   const { id } = useParams();
