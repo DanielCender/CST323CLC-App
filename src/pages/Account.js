@@ -6,6 +6,30 @@ import bcrypt from 'bcryptjs';
 // Helpers
 import { updateUser } from '../helpers/db/updateUser';
 
+/**
+ * Renders a account page
+ * @param useHistory
+ * @param setValues 
+ * @param setUpdateResult
+ * @param handleEditPosts
+ * @param useLayoutEffect
+ * @param useEffect
+ * @param handleChange 
+ * @param handleSubmit
+ * @param props
+ * @param props.width
+ * @param props.maxWidth
+ * @param props.height
+ * @param props.position
+ * @param props.position.right
+ * @param props.position.bottom
+ * @param props.display
+ * @param props.justifyContent
+ * @param props.alignItems
+ * @param props.borderTop
+ * @param props.backgroundColor
+ * @param props.marginBottom
+ */
 export const Account = () => {
   const history = useHistory();
   const [values, setValues] = useState({

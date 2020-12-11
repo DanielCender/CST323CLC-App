@@ -2,6 +2,27 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Jumbotron, Button, Row, Col, Toast } from 'react-bootstrap';
 
+/**
+ * Renders the home page
+ * @param useHistory
+ * @param setShowToast
+ * @param handleLogin
+ * @param handleRegister
+ * @param props
+ * @param props.width
+ * @param props.maxWidth
+ * @param props.height
+ * @param props.position
+ * @param props.position.right
+ * @param props.position.bottom
+ * @param props.
+ * @param props.display
+ * @param props.justifyContent
+ * @param props.alignItems
+ * @param props.borderTop
+ * @param props.backgroundColor
+ * @param props.marginBottom
+ */
 export const Home = () => {
   const history = useHistory()
 

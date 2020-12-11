@@ -3,6 +3,26 @@ import { useHistory } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useEffect, useState, useLayoutEffect } from 'react';
 
+/**
+ * Renders the logout page
+ * @param useHistory
+ * @param setCount
+ * @param useLayoutEffect
+ * @param useEffect
+ * @param props
+ * @param props.width
+ * @param props.maxWidth
+ * @param props.height
+ * @param props.position
+ * @param props.position.right
+ * @param props.position.bottom
+ * @param props.display
+ * @param props.justifyContent
+ * @param props.alignItems
+ * @param props.borderTop
+ * @param props.backgroundColor
+ * @param props.marginBottom
+ */
 export const Logout = () => {
   let history = useHistory();
   const [count, setCount] = useState(3);
