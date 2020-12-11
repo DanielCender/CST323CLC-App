@@ -36,7 +36,7 @@ export const PostManagement = () => {
   const [showToast, setShowToast] = useState(false);
   const toggleShowToast = () => setShowToast(!showToast);
 
-  const handleCreatePost = () => history.push('/post/create');
+  const handleCreatePost = () => history.push('/posts/create');
 
   // If user is not logged in, redirect them
   useLayoutEffect(() => {

@@ -45,7 +45,6 @@ createPostRoutes(app);
 
 // Express only serves static assets in production
 if (process.env.NODE_ENV === 'production') {
-  // app.use(express.static(path.join(__dirname, 'build', 'index.html')));
   app.use(express.static(__dirname));
   app.use(express.static(path.join(__dirname, 'build')));
   app.get('*', (req, res) => {

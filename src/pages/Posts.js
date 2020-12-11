@@ -36,7 +36,6 @@ export const Posts = () => {
   useEffect(() => {
     listAllPosts()
       .then((res) => {
-        console.log('setting posts: ', res);
         setPosts(res);
       })
       .catch((e) => {
@@ -64,23 +63,40 @@ export const Posts = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'flex-start',
+          flexDirection: 'column',
           borderTop: '15px solid #A0A09F',
         }}
         className='bg-dark pt-4 pb-4'
       >
-        {posts.map((el) => {
-          return (
-            <Row key={el.ID}>
-              <Col>
-                <Link to={`/post/${el.ID}`}>
-                  <Button variant='warning' type='button' size='lg'>
-                    {el.Title}
-                  </Button>
-                </Link>
-              </Col>
-            </Row>
-          );
-        })}
+        <div
+          style={{
+            width: '40%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'column',
+          }}
+          className='bg-dark pt-4 pb-4'
+        >
+          {posts.map((el) => {
+            return (
+              <Row key={el.ID} className='pb-3'>
+                <Col>
+                  <Link to={`/post/${el.ID}`}>
+                    <Button
+                      variant='warning'
+                      type='button'
+                      size='lg'
+                      style={{ width: '300px', textOverflow: 'clip' }}
+                    >
+                      {el.Title}
+                    </Button>
+                  </Link>
+                </Col>
+              </Row>
+            );
+          })}
+        </div>
         <Toast
           show={showToast}
           onClose={toggleShowToast}

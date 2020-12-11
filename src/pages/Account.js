@@ -9,12 +9,12 @@ import { updateUser } from '../helpers/db/updateUser';
 /**
  * Renders a account page
  * @param useHistory
- * @param setValues 
+ * @param setValues
  * @param setUpdateResult
  * @param handleEditPosts
  * @param useLayoutEffect
  * @param useEffect
- * @param handleChange 
+ * @param handleChange
  * @param handleSubmit
  * @param props
  * @param props.width
@@ -33,18 +33,18 @@ import { updateUser } from '../helpers/db/updateUser';
 export const Account = () => {
   const history = useHistory();
   const [values, setValues] = useState({
-    email: (JSON.parse(window.localStorage.getItem("USER")) || {}).Email,
+    email: (JSON.parse(window.localStorage.getItem('USER')) || {}).Email,
     oldPassword: '',
     password: '',
   });
   const [updateResult, setUpdateResult] = useState(null);
 
-  const handleEditPosts = () => history.push('/account/posts')
+  const handleEditPosts = () => history.push('/account/posts');
 
   // If user is not logged in, redirect them
   useLayoutEffect(() => {
     if (!window.localStorage.getItem('USER')) history.push('/login');
-  }, []);
+  }, [history]);
 
   // This effect will see changes after a successful account creation,
   //  and handle the redirect for us
@@ -61,8 +61,6 @@ export const Account = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     bcrypt.genSalt(10, function (err, salt) {
-      console.log('salt: ', salt);
-      console.log('pass: ', values.password);
       bcrypt.hash(values.password, salt, function (err, hash) {
         // Store hash in your password DB.
         updateUser({ ...values, password: hash })
@@ -95,21 +93,32 @@ export const Account = () => {
         style={{
           width: '100%',
           height: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'flex-start',
+          // display: 'flex',
+          // justifyContent: 'center',
+          // alignItems: 'flex-start',
           borderTop: '15px solid #A0A09F',
         }}
         className='bg-dark pt-4 pb-4'
       >
-         <Row className='d-flex justify-content-center align-items-center pt-4'>
-        <Col style={{ maxWidth: '350px' }}>
-            <Button block size='lg' variant='warning' type='button' className='text-light' onClick={handleEditPosts}>
+        <Row className='d-flex justify-content-center align-items-center pt-4'>
+          <Col style={{ maxWidth: '350px' }}>
+            <Button
+              block
+              size='lg'
+              variant='warning'
+              type='button'
+              className='text-light'
+              onClick={handleEditPosts}
+            >
               WRITE OR EDIT POSTS
             </Button>
-        </Col>
-      </Row>
-        <Form onSubmit={handleSubmit} validated={!!updateResult}>
+          </Col>
+        </Row>
+        <Form
+          style={{ paddingLeft: '20%', paddingRight: '20%', marginTop: '25px' }}
+          onSubmit={handleSubmit}
+          validated={!!updateResult}
+        >
           {/* <Row>
             <Col>
               <Form.Group controlId='formGroupFirstName'>
@@ -142,7 +151,7 @@ export const Account = () => {
           </Row> */}
           <Row>
             <Col>
-              <h3 className='text-light'>UPDATE PASSWORD</h3>
+              <h3 className='text-light text-center'>UPDATE PASSWORD</h3>
             </Col>
           </Row>
           <Row>

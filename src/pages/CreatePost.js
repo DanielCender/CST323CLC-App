@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Container, Toast } from 'react-bootstrap';
 
 // UI Comps
 import PostEditor from '../components/Editor';
 
 // Helpers
-import { getPost } from './../helpers/db/getPost';
+import { savePost } from './../helpers/db/savePost';
 
 /**
  * Renders the editPost page
@@ -30,33 +30,27 @@ import { getPost } from './../helpers/db/getPost';
  * @param props.backgroundColor
  * @param props.marginBottom
  */
-export const EditPost = () => {
+export const CreatePost = () => {
   const history = useHistory();
-  const { id } = useParams();
-  console.log('post id in editor: ', id);
-  const [post, setPost] = useState({});
-  const [errMsg, setErrMsg] = useState(null);
+  const [msg, setMsg] = useState(null);
   const [showToast, setShowToast] = useState(false);
   const toggleShowToast = () => setShowToast(!showToast);
 
-  useEffect(() => {
-    console.log(' in here');
-    if (id !== undefined) {
-      getPost({ id })
-        .then((res) => {
-          console.log('setting post: ', res);
-          if (JSON.stringify(res) === JSON.stringify({})) {
-            // Go back, no post exists for this id
-            // history.push('/account/posts');
-            // history.back();
-          }
-          setPost(res);
-        })
-        .catch((e) => {
-          setErrMsg(e.message);
-        });
-    }
-  }, [id]);
+  const handleSubmit = (data, event) => {
+    event.preventDefault();
+    const { title, content, id } = data;
+    const author = (JSON.parse(window.localStorage.getItem('USER')) || {}).email;
+    // Store hash in your password DB.
+    savePost({ id, title, content, author })
+      .then((_) => {
+        setMsg('Post saved successfully!');
+        setTimeout(() => history.goBack(), 1000);
+      })
+      .catch((e) => {
+        console.log('error in registration: ', e.message);
+        setMsg(e.message);
+      });
+  };
 
   return (
     <Container fluid className='p-0 m-0' style={{ width: '100%', height: '100%' }}>
@@ -69,7 +63,7 @@ export const EditPost = () => {
         }}
         className='bg-dark-gray'
       >
-        <h1>POST</h1>
+        <h1>CREATE POST</h1>
       </div>
       <div
         style={{
@@ -82,9 +76,8 @@ export const EditPost = () => {
         }}
         className='bg-dark pt-4 pb-4'
       >
-        <h2>{post.Title}</h2>
         {/** Render the DraftJS Editor (readonly) in here */}
-        <PostEditor readOnly={true} data={post.Content || null} />
+        <PostEditor readOnly={false} saveHandler={handleSubmit} />
         <Toast
           show={showToast}
           onClose={toggleShowToast}
@@ -94,11 +87,11 @@ export const EditPost = () => {
             <img src='holder.js/20x20?text=%20' className='rounded mr-2' alt='' />
             <strong className='mr-auto'>Error</strong>
           </Toast.Header>
-          <Toast.Body>{errMsg}</Toast.Body>
+          <Toast.Body>{msg}</Toast.Body>
         </Toast>
       </div>
     </Container>
   );
 };
 
-export default EditPost;
+export default CreatePost;

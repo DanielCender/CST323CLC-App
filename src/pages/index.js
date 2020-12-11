@@ -7,4 +7,5 @@ export * from './Post';
 export * from './Account';
 export * from './Logout';
 export * from './PostManagement';
+export * from './CreatePost';
 export * from './EditPost';

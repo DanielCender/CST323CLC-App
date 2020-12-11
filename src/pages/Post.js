@@ -44,7 +44,7 @@ export const Post = () => {
         console.log('setting post: ', res);
         if (JSON.stringify(res) === JSON.stringify({})) {
           // Go back, no post exists for this id
-          history.push('/posts');
+          // history.push('/posts');
         }
         setPost(res);
       })
